@@ -1,5 +1,6 @@
 package org.tanjungchil.dummy.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @RestController
 public class DummyApiController {
 
-
+    @CrossOrigin(originPatterns = "localhost:8080")
     @GetMapping(value = {"/api", "/api/*"})
     DummyResponseDto sendMessage(DummyRequestDto requestDto) throws InterruptedException {
 
