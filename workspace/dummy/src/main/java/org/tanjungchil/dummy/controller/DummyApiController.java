@@ -13,10 +13,10 @@ public class DummyApiController {
 
 
     @GetMapping(value = {"/api", "/api/*"})
-    DummyResponseDto sendMessage(DummyRequestDto requestDto) {
+    DummyResponseDto sendMessage(DummyRequestDto requestDto) throws InterruptedException {
 
         DummyResponseDto response = createResponse(requestDto.getQuery());
-
+        Thread.sleep(200 + Math.round(Math.random() * 2000));
         return response;
     }
 

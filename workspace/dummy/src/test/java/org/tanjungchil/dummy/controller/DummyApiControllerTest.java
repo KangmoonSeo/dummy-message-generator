@@ -14,7 +14,7 @@ class DummyApiControllerTest {
 
     @Autowired DummyApiController dummyApiController;
     @Test
-    public void 메시지_반환() {
+    public void 메시지_반환() throws InterruptedException {
         // given
         DummyRequestDto requestDto = DummyRequestDto.builder()
                 .query("hello")
