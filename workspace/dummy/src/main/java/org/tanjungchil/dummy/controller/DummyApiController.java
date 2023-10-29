@@ -1,8 +1,9 @@
 package org.tanjungchil.dummy.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.slf4j.LoggerFactory;
+
+import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.tanjungchil.dummy.dto.DummyRequestDto;
 import org.tanjungchil.dummy.dto.DummyResponseDto;
@@ -12,7 +13,13 @@ import java.time.LocalDateTime;
 @RestController
 public class DummyApiController {
 
-    @CrossOrigin(originPatterns = "localhost:8080")
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
+    @GetMapping("/")
+    String welcome() {
+        return "welcome :)";
+    }
+
     @GetMapping(value = {"/api", "/api/*"})
     DummyResponseDto sendMessage(DummyRequestDto requestDto) throws InterruptedException {
 
@@ -23,24 +30,25 @@ public class DummyApiController {
 
 
     DummyResponseDto createResponse(String query) {
-        Boolean isFinished = (Math.random() < 0.2); // 0.8: continue, 0.2: finish
+        Boolean isFinished = (Math.random() < 0.3); // 0.7: continue, 0.3: finish
 
         DummyResponseDto ret;
         if (isFinished) {
             ret = DummyResponseDto.builder()
                     .isFinished(true)
                     .contentType("text")
-                    .content("fin: from " + query + "\n")
+                    .content("[last content] from " + query + "\n")
                     .createdDate(LocalDateTime.now())
                     .build();
         } else {
             ret = DummyResponseDto.builder()
                     .isFinished(false)
                     .contentType("text")
-                    .content("cont: from " + query + "\n")
+                    .content("[content] from " + query + "\n")
                     .createdDate(LocalDateTime.now())
                     .build();
         }
+        log.info(ret.getContent());
         return ret;
     }
 }
