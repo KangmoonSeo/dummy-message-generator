@@ -1,8 +1,18 @@
 # dummy-message-generator
 simple message generator for LLM Project
 
+## quick start
+1. install jdk-11 or jdk-17
+    ```bash
+    # jdk-11
+    sudo apt-get install openjdk-11-jdk 
+    ```
+2. run start.sh
+	```bash
+	sh start.sh
+	```
 
-### API docs
+## API docs
 - Request
     - Request Syntax
         | 메서드 | 요청 URL |
