@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.tanjungchil.dummy.dto.DummyRequestDto;
 import org.tanjungchil.dummy.dto.DummyResponseDto;
@@ -15,16 +16,25 @@ public class DummyApiController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @GetMapping("/")
-    String welcome() {
-        return "welcome :)";
+    @RequestMapping("/upload")
+    String upload() throws InterruptedException {
+
+        Thread.sleep(2000 + Math.round(Math.random() * 2000));
+        return "upload completed";
+    }
+    @RequestMapping("/embed")
+    String embed() throws InterruptedException {
+
+        Thread.sleep(8000 + Math.round(Math.random() * 2000));
+        return "embed completed";
     }
 
-    @GetMapping(value = {"/api", "/api/*"})
+
+    @RequestMapping(value = {"/query", "/query/*"})
     DummyResponseDto sendMessage(DummyRequestDto requestDto) throws InterruptedException {
 
         DummyResponseDto response = createResponse(requestDto.getQuery());
-        Thread.sleep(200 + Math.round(Math.random() * 2000));
+        Thread.sleep(2000 + Math.round(Math.random() * 2000));
         return response;
     }
 
